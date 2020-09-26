@@ -2,6 +2,11 @@ package com.address;
 import java.util.*;
 
 public class AddressBookMain {
+	public static List<ContactPerson> addressBook = new ArrayList<>();
+	
+	public void addContactPersonDetails(ContactPerson contactPerson) {
+		addressBook.add(contactPerson);
+	}
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to Address Book Program");
@@ -25,7 +30,11 @@ public class AddressBookMain {
 		String emailId=sc.next();
 		
 		ContactPerson personDetails=new ContactPerson(firstName,lastName,address,city,state,zip,phoneNo,emailId);
-		System.out.println(personDetails);
+		AddressBookMain addressBookMain=new AddressBookMain();
+		addressBookMain.addContactPersonDetails(personDetails);
+		for(ContactPerson contactPerson: addressBook) {
+			System.out.println(contactPerson);
+		}
 	}
 
 }

@@ -8,8 +8,20 @@ public class AddressBookMain {
 		addressBook.add(contactPerson);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("Welcome to Address Book Program");
+	public void editContactPersonDetailsByName(String name) {
+		int count=0;
+		for(ContactPerson contactPerson: addressBook) {
+			String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+			if(name.equals(personName)) {
+				contactPerson = AddressBookMain.addDetails();
+				addressBook.set(count,contactPerson);
+				break;
+			}
+			count++;
+		}
+	}
+	
+	public static ContactPerson addDetails(){
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the first name:");
 		String firstName=sc.next();
@@ -30,8 +42,31 @@ public class AddressBookMain {
 		String emailId=sc.next();
 		
 		ContactPerson personDetails=new ContactPerson(firstName,lastName,address,city,state,zip,phoneNo,emailId);
+		return personDetails;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Welcome to Address Book Program");
 		AddressBookMain addressBookMain=new AddressBookMain();
-		addressBookMain.addContactPersonDetails(personDetails);
+		
+		System.out.println("Number of Person's details to be added:");
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		
+		for(int i=0;i<n;i++) {
+			ContactPerson personDetails=addressBookMain.addDetails();
+			addressBookMain.addContactPersonDetails(personDetails);
+		}
+		
+		for(ContactPerson contactPerson: addressBook) {
+			System.out.println(contactPerson);
+		}
+		
+		System.out.println("Name of Person whose details to be edited:");
+		sc.nextLine();
+		String name=sc.nextLine();
+		addressBookMain.editContactPersonDetailsByName(name);
+		
 		for(ContactPerson contactPerson: addressBook) {
 			System.out.println(contactPerson);
 		}

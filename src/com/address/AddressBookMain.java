@@ -21,6 +21,18 @@ public class AddressBookMain {
 		}
 	}
 	
+	public void deleteContactPersonDetailsByName(String name) {
+		int count=0;
+		for(ContactPerson contactPerson: addressBook) {
+			String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+			if(name.equals(personName)) {
+				addressBook.remove(count);
+				break;
+			}
+			count++;
+		}
+	}
+	
 	public static ContactPerson addDetails(){
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the first name:");
@@ -67,6 +79,15 @@ public class AddressBookMain {
 		String name=sc.nextLine();
 		addressBookMain.editContactPersonDetailsByName(name);
 		
+		for(ContactPerson contactPerson: addressBook) {
+			System.out.println(contactPerson);
+		}
+		
+		System.out.println("Name of Person whose details to be deleted:");
+		String deleteName=sc.nextLine();
+		addressBookMain.deleteContactPersonDetailsByName(deleteName);
+		
+		System.out.println("Person's details after deletion:");
 		for(ContactPerson contactPerson: addressBook) {
 			System.out.println(contactPerson);
 		}
